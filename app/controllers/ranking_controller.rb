@@ -1,11 +1,11 @@
 class RankingController < ApplicationController
 
     def want
-        @top_10 = Item.find(:all, :order, => "want_users.count DESC" )
+        @want_ranking_items = Item.want_top10
     end
     
     def have
-        @top_10 = Item.find(:all, :order => "have_users.count DESC" )
+        @have_ranking_items = Item.have_top10
     end
 
 end
