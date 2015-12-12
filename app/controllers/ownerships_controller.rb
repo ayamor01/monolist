@@ -3,7 +3,7 @@ class OwnershipsController < ApplicationController
 
   def create
     if params[:asin]
-      @item = Item.find_or_create_by(asin: params[:asin])
+      @item = Item.find_or_initialize_by(asin: params[:asin])
     else
       @item = Item.find(params[:item_id])
     end
@@ -11,7 +11,7 @@ class OwnershipsController < ApplicationController
     # itemsテーブルに存在しない場合はAmazonのデータを登録する。
     if @item.new_record?
       begin
-        response = Amazon::Ecs.item_lookup(asin: params[:asin], :response_group => 'Medium')
+        response = Amazon::Ecs.item_lookup(params[:asin], :response_group => 'Medium', :country => 'jp')
       rescue Amazon::RequestError => e
         return render :js => "alert('#{e.message}')"
       end

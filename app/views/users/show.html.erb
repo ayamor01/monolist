@@ -1,8 +1,8 @@
 <% content_for :title do %>
  <%= @user.name %>
 <% end %>
-<% content_for :user_description do %>
- <%= @user.name %>
+<% content_for :description do %>
+  <%= @user.name %>のモノページ。<%= @user.name %>の欲しいモノ、持ってるモノを表示しています。
 <% end %>
 
 <%= render 'profile' , user: @user %>
