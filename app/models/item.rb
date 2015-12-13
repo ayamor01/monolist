@@ -12,7 +12,7 @@ class Item < ActiveRecord::Base
   scope :want_top10, ->{
     select("items.*, count(user_id) AS want_count").
     joins(:wants).
-    group("item.id").
+    group("items.id").
     order("want_count DESC").
     limit(10)
   }
@@ -20,7 +20,7 @@ class Item < ActiveRecord::Base
   scope :have_top10, ->{
     select("items.*, count(user_id) AS have_count").
     joins(:haves).
-    group("item.id").
+    group("items.id").
     order("have_count DESC").
     limit(10)
   }
